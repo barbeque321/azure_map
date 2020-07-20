@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+	<div id="myMap" style="position:relative;width:100%;min-width:290px;height:600px;"></div>
+
+    <div style="position:absolute;top:10px;left:10px;background-color:white;border-radius:10px;padding:10px;">
+        POI Query: <input type="text" id="queryTbx" value="pizza"/>
+    </div>
+
+    <fieldset style="width:calc(100% - 30px);min-width:290px;margin-top:10px;">
+        <legend><h1 style="font-size:16px">Draw and search polygon area</h1></legend>
+        This sample shows how to use the drawing tools to search for points of interests within drawn areas. 
+        Update the type of point of interest in the text box to filter what results are returned. 
+    </fieldset>
+{% endblock %}
