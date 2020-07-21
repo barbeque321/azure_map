@@ -1,10 +1,16 @@
 {% extends "base.html" %}
 
 {% block page_content %}
-	<div id="myMap" style="position:relative;width:100%;min-width:290px;height:600px;"></div>
-
-    <div style="position:absolute;top:10px;left:10px;background-color:white;border-radius:10px;padding:10px;">
-        POI Query: <input type="text" id="queryTbx" value="pizza"/>
-    </div>
-
+	<div id="mapid"></div>
+	<script>
+		var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+		L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    	attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+	    maxZoom: 18,
+	    id: 'mapbox/streets-v11',
+	    tileSize: 512,
+	    zoomOffset: -1,
+	    accessToken: 'pk.eyJ1IjoiYmFyYmVxdWUzMjEiLCJhIjoiY2tjdmRrNXJsMDM5azMwbWxxZmV4ZnNiOSJ9.yfDNme8zDNu5ncngce2KqQ'
+		}).addTo(mymap);
+	</script>
 {% endblock %}
