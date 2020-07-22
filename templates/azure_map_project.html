@@ -3,21 +3,174 @@
 {% block page_content %}
 
 <div id="map"></div>
-
+<label for="adres">Adres:</label>
+	<input type="text" id="adres">
+	<!-- <label for="nrdomu">Numer domu:</label> -->
+	<!-- <input type="text" id="nrdomu"><br> -->
+	<button type="button" id ="p1">Przeslij</button>
+	<button type="button" id ="p2">Wyczyść</button>
+	
+	<form class="form-inline">
+      <label>Geometry type &nbsp;</label>
+      <select id="type">
+        <option value="None">Brak</option>
+        <option value="Polygon">Polygon</option>
+        <option value="Circle">Koło</option>  
+		<!-- <option value="Point">Punkt</option>		 -->
+      </select>
+    </form>
 <script>
-	var map = new ol.Map({
-    target: 'map',
-    layers: [
-      new ol.layer.Tile({
-        source: new ol.source.OSM()
-      })
-    ],
-    view: new ol.View({
-      center: ol.proj.fromLonLat([18.597880,54.406467]),
-      zoom: 8
+	function load() {
+        console.log("load event detected!");
+      }
+//TODO: pobieranie współrzędnych punktów, polygonów i kółek  
+//TODO: pobranie adresów wewnątrz koła/ polygonu?
+//			https://opencagedata.com/
 
-    })
-});
+
+//dodanie obsługi przycisku po upewenieniu się, że załadowano cały html
+window.onload = function(){	  
+		  
+		load();	
+		
+		var siedziba = 0;
+		
+		var raster = new TileLayer({
+			source: new OSM()
+		});
+
+		var source = new VectorSource({wrapX: false});
+
+		var vector = new VectorLayer({
+			source: source
+		});
+
+		//https://openlayers.org/en/latest/examples/reprojection-by-code.html
+		//stworzenie mapy
+		const map = new Map({
+		  target: 'map',
+		  layers: [raster, vector],
+		  view: new View({
+			center: fromLonLat([18.585847, 54.403101]),
+			//center: transform([0, 0], projection,'EPSG:3857'),
+			//center: [528468.14591174, 672881.017907401],
+			zoom: 13
+		  })
+		});
+		
+		document.getElementById("p1").addEventListener("click", myFunction);
+		document.getElementById("p2").addEventListener("click", p2);
+		
+		var typeSelect = document.getElementById('type');
+		var draw, snap; 
+		
+		function addInteraction() {
+			var value = typeSelect.value;
+			
+			if (value !== 'None'){
+				
+				draw = new Draw({
+					source: source,
+					type: typeSelect.value,
+					freehandCondition: shiftKeyOnly
+				});			
+			
+			
+				map.addInteraction(draw);
+				snap = new Snap({source: source});
+				map.addInteraction(snap);	
+			
+				//narysowanie max 2 elementów
+				draw.on('drawstart', function () {
+				
+					if( source.getFeatures().length >=2){
+						map.removeInteraction(draw);
+						document.getElementById('type').value='None';
+					}
+					
+				});
+				
+				//tutaj pobranie:
+				//współrzędnych centrum koła i promienia
+				//punktów polygonu
+				draw.on('drawend', function(evt){
+					var geometry = evt.feature.getGeometry();
+					console.log(geometry.getType());
+					
+					if(geometry.getType() == 'Circle'){
+						
+						//Tutaj przekierować output radius i center do Pythona
+						var radius = geometry.getRadius();
+						var center = geometry.getCenter();
+						console.log(radius);	
+						console.log(center);
+					}else if(geometry.getType() == 'Polygon'){
+						
+						//Tutaj trzeba przekierować output 'poly' do skryptu w Pythonie
+						var poly = geometry.getCoordinates();
+						console.log(poly);
+						
+					}
+					
+										
+				});			
+			}			
+		}
+		
+		//zmiana wyboru
+		typeSelect.onchange = function() {
+		  map.removeInteraction(draw);
+		  map.removeInteraction(snap);
+		  addInteraction();			
+		  
+		};
+		addInteraction();  
+		  
+		  
+		var modify = new Modify({source: source});
+		map.addInteraction(modify);
+		
+		//czyszczenie narysowanych elementów
+		function p2(){
+			source.clear();
+			siedziba = 0;
+		}
+		
+		  
+		//funkcja pobierająca adres:
+		function myFunction(){
+			
+			console.log(siedziba);
+			
+			if(siedziba < 1){
+						
+				var x = document.getElementById("adres").value;				
+				var query = 'https://nominatim.openstreetmap.org/search?q='+x+'&format=jsonv2&polygon=1&addressdetails=1'			
+					
+				//nie wiem jak pogodzić zakresy JQuery z JS ale działa
+				$.getJSON(query, function(data){	  
+					  
+					  if(data){
+						  var lnglat = ([ data[0].lon, data[0].lat]);
+						  //console.log(lnglat);				  
+									  
+						  var coord = fromLonLat(lnglat);
+						  //console.log(coord);
+						  
+						  var p = new Feature(new Point(coord));				  
+						  source.addFeature(p);				  
+						  siedziba +=1;
+						  //wycentrowanie mapy na ustawionym adresie
+						  map.setView(new View({center: coord,	zoom: 13 }))
+					  }
+				});
+				
+			}
+			
+		}	
+
+		  
+}
 </script>
 
 
