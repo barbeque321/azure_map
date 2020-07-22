@@ -51,7 +51,7 @@ window.onload = function(){
 		  target: 'map',
 		  layers: [raster, vector],
 		  view: new ol.View({
-			center: fromLonLat([18.585847, 54.403101]),
+			center: ol.proj.fromLonLat([18.585847, 54.403101]),
 			//center: transform([0, 0], projection,'EPSG:3857'),
 			//center: [528468.14591174, 672881.017907401],
 			zoom: 13
