@@ -23,10 +23,6 @@
 	function load() {
         console.log("load event detected!");
       }
-//TODO: pobieranie współrzędnych punktów, polygonów i kółek  
-//TODO: pobranie adresów wewnątrz koła/ polygonu?
-//			https://opencagedata.com/
-
 
 //dodanie obsługi przycisku po upewenieniu się, że załadowano cały html
 window.onload = function(){	  
@@ -45,15 +41,11 @@ window.onload = function(){
 			source: source
 		});
 
-		//https://openlayers.org/en/latest/examples/reprojection-by-code.html
-		//stworzenie mapy
 		const map = new ol.Map({
 		  target: 'map',
 		  layers: [raster, vector],
 		  view: new ol.View({
 			center: ol.proj.fromLonLat([18.585847, 54.403101]),
-			//center: transform([0, 0], projection,'EPSG:3857'),
-			//center: [528468.14591174, 672881.017907401],
 			zoom: 13
 		  })
 		});
