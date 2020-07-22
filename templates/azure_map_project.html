@@ -72,7 +72,7 @@ window.onload = function(){
 				draw = new ol.interaction.Draw({
 					source: source,
 					type: typeSelect.value,
-					freehandCondition: shiftKeyOnly
+					freehandCondition: ol.events.condition.shiftKeyOnly
 				});			
 			
 			
