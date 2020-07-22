@@ -15,6 +15,7 @@
         <option value="Circle">Koło</option>  
     </select>
 </form>
+
 <script type="text/javascript">
 
 function main(){	  		  
@@ -104,44 +105,42 @@ function main(){
 
 
 
-		//czyszczenie narysowanych elementów
-		function p2(){
-			source.clear();
-			siedziba = 0;
-		}
+		// function p2(){
+		// 	source.clear();
+		// 	siedziba = 0;
+		// }
 
 
-		//funkcja pobierająca adres:
-		function myFunction(){
+		// function myFunction(){
 			
-			console.log(siedziba);
+		// 	console.log(siedziba);
 			
-			if(siedziba < 1){
+		// 	if(siedziba < 1){
 						
-				var x = document.getElementById("adres").value;				
-				var query = 'https://nominatim.openstreetmap.org/search?q='+x+'&format=jsonv2&polygon=1&addressdetails=1'			
+		// 		var x = document.getElementById("adres").value;				
+		// 		var query = 'https://nominatim.openstreetmap.org/search?q='+x+'&format=jsonv2&polygon=1&addressdetails=1'			
 					
-				//nie wiem jak pogodzić zakresy JQuery z JS ale działa
-				$.getJSON(query, function(data){	  
+		// 		//nie wiem jak pogodzić zakresy JQuery z JS ale działa
+		// 		$.getJSON(query, function(data){	  
 					  
-					  if(data){
-						  var lnglat = ([ data[0].lon, data[0].lat]);
-						  //console.log(lnglat);				  
+		// 			  if(data){
+		// 				  var lnglat = ([ data[0].lon, data[0].lat]);
+		// 				  //console.log(lnglat);				  
 									  
-						  var coord = ol.proj.fromLonLat(lnglat);
-						  //console.log(coord);
+		// 				  var coord = ol.proj.fromLonLat(lnglat);
+		// 				  //console.log(coord);
 						  
-						  var p = new ol.Feature(new ol.geom.Point(coord));				  
-						  source.addFeature(p);				  
-						  siedziba +=1;
-						  //wycentrowanie mapy na ustawionym adresie
-						  map.setView(new ol.View({center: coord,	zoom: 13 }))
-					  }
-				});
+		// 				  var p = new ol.Feature(new ol.geom.Point(coord));				  
+		// 				  source.addFeature(p);				  
+		// 				  siedziba +=1;
+		// 				  //wycentrowanie mapy na ustawionym adresie
+		// 				  map.setView(new ol.View({center: coord,	zoom: 13 }))
+		// 			  }
+		// 		});
 				
-			}
+		// 	}
 			
-		}	
+		// }	
 
 		  
 }
