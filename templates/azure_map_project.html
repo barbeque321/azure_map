@@ -4,47 +4,33 @@
 
 <div id="map"></div>
 <label for="adres">Adres:</label>
-	<input type="text" id="adres">
-	<!-- <label for="nrdomu">Numer domu:</label> -->
-	<!-- <input type="text" id="nrdomu"><br> -->
-	<button type="button" id ="p1">Przeslij</button>
-	<button type="button" id ="p2">Wyczyść</button>
-	
-	<form class="form-inline">
-      <label>Geometry type &nbsp;</label>
-      <select id="type">
-        <option value="None">Brak</option>
+<input type="text" id="adres">
+<button type="button" id ="p1">Przeslij</button>
+<button type="button" id ="p2">Wyczyść</button>
+<form class="form-inline">
+	<label>Geometry type &nbsp;</label>
+    <select id="type">
+    	<option value="None">Brak</option>
         <option value="Polygon">Polygon</option>
         <option value="Circle">Koło</option>  
-		<!-- <option value="Point">Punkt</option>		 -->
-      </select>
-    </form>
-<script>
-	function load() {
-        console.log("load event detected!");
-      }
+    </select>
+</form>
+<script type="text/javascript">
 
-//dodanie obsługi przycisku po upewenieniu się, że załadowano cały html
-window.onload = function(){	  
-		  
-		load();	
-		
-		var siedziba = 0;
-		
-		var raster = new ol.layer.Tile({
-			source: new ol.source.OSM()
+function main(){	  		  
+	var siedziba = 0;
+	var raster = new ol.layer.Tile({
+		source: new ol.source.OSM()
+		});
+	var source = new ol.source.Vector({wrapX: false});
+	var vector = new ol.layer.Vector({
+		source: source
 		});
 
-		var source = new ol.source.Vector({wrapX: false});
-
-		var vector = new ol.layer.Vector({
-			source: source
-		});
-
-		const map = new ol.Map({
-		  target: 'map',
-		  layers: [raster, vector],
-		  view: new ol.View({
+	const map = new ol.Map({
+		target: 'map',
+		layers: [raster, vector],
+		view: new ol.View({
 			center: ol.proj.fromLonLat([18.585847, 54.403101]),
 			zoom: 13
 		  })
@@ -55,69 +41,56 @@ window.onload = function(){
 		
 		// ---------------------------\/
 
-		var typeSelect = document.getElementById('type');
-		var draw, snap; 
+	var typeSelect = document.getElementById('type');
+	var draw, snap; 
 		
-		function addInteraction() {
-			var value = typeSelect.value;
-			
-			if (value !== 'None'){
-				
-				draw = new ol.interaction.Draw({
-					source: source,
-					type: typeSelect.value,
-					freehandCondition: ol.events.condition.shiftKeyOnly
-				});			
-			
-			
-				map.addInteraction(draw);
-				snap = new ol.interaction.Snap({source: source});
-				map.addInteraction(snap);	
+	function addInteraction() {
+		var value = typeSelect.value;	
+		if (value !== 'None'){		
+			draw = new ol.interaction.Draw({
+				source: source,
+				type: typeSelect.value,
+				freehandCondition: ol.events.condition.shiftKeyOnly
+				});							
+			map.addInteraction(draw);
+
+			snap = new ol.interaction.Snap({source: source});
+			map.addInteraction(snap);	
 		// ---------------------------/\
 
-				//narysowanie max 2 elementów
-				draw.on('drawstart', function () {
-				
-					if( source.getFeatures().length >=2){
-						map.removeInteraction(draw);
-						document.getElementById('type').value='None';
-					}
-					
+			//narysowanie max 2 elementów
+			draw.on('drawstart', function () {
+				if(source.getFeatures().length >=2){
+					map.removeInteraction(draw);
+					document.getElementById('type').value='None';
+					}			
 				});
-				
-				//tutaj pobranie:
-				//współrzędnych centrum koła i promienia
-				//punktów polygonu
-				draw.on('drawend', function(evt){
-					var geometry = evt.feature.getGeometry();
-					console.log(geometry.getType());
+
+			// ---------------------------\/
+			draw.on('drawend', function(event){
+				var geometry = event.feature.getGeometry();
+				console.log(geometry.getType());
 					
-					if(geometry.getType() == 'Circle'){
-						
-						//Tutaj przekierować output radius i center do Pythona
-						var radius = circle.getRadius();
-						var center = circle.getCenter();
-						console.log(radius);	
-						console.log(center);
-					}else if(geometry.getType() == 'Polygon'){
-						
-						//Tutaj trzeba przekierować output 'poly' do skryptu w Pythonie
-						var poly = geometry.getCoordinates();
-						console.log(poly);
-						
-					}
-					
-										
+				if(geometry.getType() == 'Circle'){
+					//Tutaj przekierować output radius i center do Pythona
+					var radius = circle.getRadius();
+					var center = circle.getCenter();
+					console.log(radius);	
+					console.log(center);
+				}else if(geometry.getType() == 'Polygon'){
+					//Tutaj trzeba przekierować output 'poly' do skryptu w Pythonie
+					var poly = geometry.getCoordinates();
+					console.log(poly);
+					}					
 				});			
 			}			
 		}
+			// ---------------------------/\
 		// ---------------------------\/
-		//zmiana wyboru
-		typeSelect.onchange = function() {
-		  map.removeInteraction(draw);
-		  map.removeInteraction(snap);
-		  addInteraction();			
-		  
+			typeSelect.onchange = function() {
+				map.removeInteraction(draw);
+			  	map.removeInteraction(snap);
+			  	addInteraction();			
 		};
 		addInteraction();  
 		// ---------------------------/\
@@ -125,13 +98,19 @@ window.onload = function(){
 		var modify = new ol.interaction.Modify({source: source});
 		map.addInteraction(modify);
 		
+
+
+
+
+
+
 		//czyszczenie narysowanych elementów
 		function p2(){
 			source.clear();
 			siedziba = 0;
 		}
-		
-		  
+
+
 		//funkcja pobierająca adres:
 		function myFunction(){
 			
@@ -166,21 +145,11 @@ window.onload = function(){
 
 		  
 }
+
+window.addEventListener ? 
+window.addEventListener("load", main, false) : 
+window.attachEvent && window.attachEvent("onload", main);
+
 </script>
 
-
-
-	<!-- <div id="mapid"></div>
-	<script>
-		var mymap = L.map('mapid').setView([54.406467, 18.597880], 13);
-
-		L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-    	attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-	    maxZoom: 18,
-	    id: 'mapbox/streets-v11',
-	    tileSize: 512,
-	    zoomOffset: -1,
-	    accessToken: 'pk.eyJ1IjoiYmFyYmVxdWUzMjEiLCJhIjoiY2tjdmZobmFtMDNxMTJzbWxnNzZqbm9yMCJ9.ObabPLYp45XKn0uVqG6-vA'
-		}).addTo(mymap);
-	</script> -->
 {% endblock %}
