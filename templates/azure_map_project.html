@@ -64,6 +64,8 @@ window.onload = function(){
 		var typeSelect = document.getElementById('type');
 		var draw, snap; 
 		
+
+		// ---------------------------\/
 		function addInteraction() {
 			var value = typeSelect.value;
 			
@@ -79,7 +81,8 @@ window.onload = function(){
 				map.addInteraction(draw);
 				snap = new ol.interaction.Snap({source: source});
 				map.addInteraction(snap);	
-			
+		// ---------------------------/\
+
 				//narysowanie max 2 elementów
 				draw.on('drawstart', function () {
 				
@@ -94,7 +97,7 @@ window.onload = function(){
 				//współrzędnych centrum koła i promienia
 				//punktów polygonu
 				draw.on('drawend', function(evt){
-					var geometry = ol.evt.feature.getGeometry();
+					var geometry = evt.feature.getGeometry();
 					console.log(geometry.getType());
 					
 					if(geometry.getType() == 'Circle'){
@@ -116,7 +119,7 @@ window.onload = function(){
 				});			
 			}			
 		}
-		
+		// ---------------------------\/
 		//zmiana wyboru
 		typeSelect.onchange = function() {
 		  map.removeInteraction(draw);
@@ -125,7 +128,7 @@ window.onload = function(){
 		  
 		};
 		addInteraction();  
-		  
+		// ---------------------------/\
 		  
 		var modify = new ol.interaction.Modify({source: source});
 		map.addInteraction(modify);
