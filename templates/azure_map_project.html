@@ -100,14 +100,14 @@ window.onload = function(){
 					if(geometry.getType() == 'Circle'){
 						
 						//Tutaj przekierować output radius i center do Pythona
-						var radius = ol.geometry.getRadius();
-						var center = ol.geometry.getCenter();
+						var radius = circle.getRadius();
+						var center = circle.getCenter();
 						console.log(radius);	
 						console.log(center);
 					}else if(geometry.getType() == 'Polygon'){
 						
 						//Tutaj trzeba przekierować output 'poly' do skryptu w Pythonie
-						var poly = ol.geometry.getCoordinates();
+						var poly = geometry.getCoordinates();
 						console.log(poly);
 						
 					}
