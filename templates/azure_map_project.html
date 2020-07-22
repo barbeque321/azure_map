@@ -154,14 +154,14 @@ window.onload = function(){
 						  var lnglat = ([ data[0].lon, data[0].lat]);
 						  //console.log(lnglat);				  
 									  
-						  var coord = ol.fromLonLat(lnglat);
+						  var coord = ol.proj.fromLonLat(lnglat);
 						  //console.log(coord);
 						  
-						  var p = new Feature(new Point(coord));				  
+						  var p = new ol.Feature(new ol.geom.Point(coord));				  
 						  source.addFeature(p);				  
 						  siedziba +=1;
 						  //wycentrowanie mapy na ustawionym adresie
-						  map.setView(new View({center: coord,	zoom: 13 }))
+						  map.setView(new ol.View({center: coord,	zoom: 13 }))
 					  }
 				});
 				
