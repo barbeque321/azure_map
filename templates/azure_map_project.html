@@ -35,13 +35,13 @@ window.onload = function(){
 		
 		var siedziba = 0;
 		
-		var raster = new TileLayer({
-			source: new OSM()
+		var raster = new ol.layer.Tile({
+			source: new ol.source.OSM()
 		});
 
-		var source = new VectorSource({wrapX: false});
+		var source = new ol.source.Vector({wrapX: false});
 
-		var vector = new VectorLayer({
+		var vector = new ol.layer.Vector({
 			source: source
 		});
 
