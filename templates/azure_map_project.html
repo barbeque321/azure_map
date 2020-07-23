@@ -2,14 +2,30 @@
 
 {% block page_content %}
 <!-- center: ol.proj.fromLonLat([18.585847, 54.403101]), -->
-<div id="map"></div>
+<div id="map" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
+<div id="coords" style="position: fixed; bottom: 0; right: 0; width: 50%; height: 20%; z-index: 99; background-color: white; text-wrap: "></div>
 
 <script>
-var map = L.map('map', {drawControl: true}).setView([54.391091, 18.600883], 11);
+// var map = L.map('map', {drawControl: true}).setView([54.391091, 18.600883], 11);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+// L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+//     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+// }).addTo(map);
+
+
+var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  osm = L.tileLayer(osmUrl, {
+    maxZoom: 18,
+    attribution: osmAttrib
+  }),
+  map = new L.Map('map', {
+    layers: [osm],
+    center: new L.LatLng(54.391091, 18.600883),
+    zoom: 11
+  });
+
+
 
 L.marker([54.391091, 18.600883]).addTo(map)
     .bindPopup('Some Coder cave')
