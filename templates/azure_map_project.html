@@ -62,9 +62,9 @@
 
 
 
-// L.marker([54.391091, 18.600883]).addTo(map)
-//     .bindPopup('Some Coder cave')
-//     .openPopup();
+L.marker([54.391091, 18.600883]).addTo(map)
+    .bindPopup('Some Coder cave')
+    .openPopup();
 
 // var drawnItems = new L.FeatureGroup();
 // map.addLayer(drawnItems);
@@ -122,15 +122,15 @@
 //   drawnItems.addLayer(layer);
 // });
 
-// var popup = L.popup();
+var popup = L.popup();
 
-// function onMapClick(e) {
-//     popup
-//         .setLatLng(e.latlng)
-//         .setContent("Hm what's here... " + e.latlng.toString())
-//         .openOn(map);
-// }
+function onMapClick(e) {
+    popup
+        .setLatLng(e.latlng)
+        .setContent("Hm what's here... " + e.latlng.toString())
+        .openOn(map);
+}
 
-// map.on('click', onMapClick);
+map.on('click', onMapClick);
 </script>
 {% endblock %}
