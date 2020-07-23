@@ -5,7 +5,7 @@
 <div id="map"></div>
 
 <script>
-var map = L.map('map').setView([54.403101,18.585847], 8);
+var map = L.map('map').setView([54.403101,18.585847], 10);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -20,7 +20,7 @@ var popup = L.popup();
 function onMapClick(e) {
     popup
         .setLatLng(e.latlng)
-        .setContent("badum tss" + e.latlng.toString())
+        .setContent("Hm what's here... " + e.latlng.toString())
         .openOn(map);
 }
 
