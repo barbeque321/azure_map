@@ -1,16 +1,10 @@
 {% extends "base.html" %}
 
 {% block page_content %}
-<!-- center: ol.proj.fromLonLat([18.585847, 54.403101]), -->
 <div id="map" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
-<!-- <div id="coords" style="position: fixed; bottom: 0; right: 0; width: 50%; height: 20%; z-index: 99; background-color: white; text-wrap: "></div> -->
 
 <script>
-// var map = L.map('map', {drawControl: true}).setView([54.391091, 18.600883], 11);
 
-// L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-//     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-// }).addTo(map);
 
     var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
             osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -18,11 +12,11 @@
             map = new L.Map('map', { center: new L.LatLng(54.391091, 18.600883), zoom: 11 }),
             drawnItems = L.featureGroup().addTo(map);
     L.control.layers({
-        'osm': osm.addTo(map),
-        "google": L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
+        'Mapa': osm.addTo(map),
+        "Satelita": L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
             attribution: 'google'
         })
-    }, { 'drawlayer': drawnItems }, { position: 'topleft', collapsed: false }).addTo(map);
+    }, { 'Zaznaczenia': drawnItems }, { position: 'topleft', collapsed: false }).addTo(map);
     map.addControl(new L.Control.Draw({
         edit: {
             featureGroup: drawnItems,
@@ -46,81 +40,11 @@
 
 
 
-
-
-// var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-//   osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-//   osm = L.tileLayer(osmUrl, {
-//     maxZoom: 18,
-//     attribution: osmAttrib
-//   }),
-//   map = new L.Map('map', {
-//     layers: [osm],
-//     center: new L.LatLng(54.391091, 18.600883),
-//     zoom: 11
-//   });
-
-
-
 L.marker([54.391091, 18.600883]).addTo(map)
-    .bindPopup('Some Coder cave')
+    .bindPopup('Some lazy Coder cave')
     .openPopup();
 
-// var drawnItems = new L.FeatureGroup();
-// map.addLayer(drawnItems);
 
-// var drawControl = new L.Control.Draw({
-//   draw: {
-//     position: 'topleft',
-//     polygon: {
-//       allowIntersection: false,
-//       drawError: {
-//         color: '#b00b00',
-//         timeout: 1000
-//       },
-//       shapeOptions: {
-//         color: '#bada55'
-//       },
-//       showArea: true
-//     },
-//     polyline: {
-//       metric: false
-//     },
-//     circle: {
-//       shapeOptions: {
-//         color: '#662d91'
-//       }
-//     }
-//   },
-//   edit: {
-//     featureGroup: drawnItems
-//   }
-// });
-// map.addControl(drawControl);
-
-// map.on('draw:created', function(e) {
-//   var type = e.layerType;
-//   var layer = e.layer;
-//   var coords;
-//   console.log(e);
-//   if (type === 'marker') {
-//     coords = JSON.stringify(layer._latlng);
-//   }
-//   if (type === 'circle') {
-//     coords = JSON.stringify(layer._latlng) + " " + layer._mRadius;
-//   }
-//   if (type === 'rectangle') {
-//     coords = JSON.stringify(layer._latlngs);
-//   }
-//   if (type === 'polygon') {
-//     coords = JSON.stringify(layer._latlngs);
-//   }
-//   if (type === 'polyline') {
-//     coords = JSON.stringify(layer._latlngs);
-//   }
-//   document.getElementById("coords").innerHTML = coords;
-//   drawnItems.addLayer(layer);
-// });
 
 var popup = L.popup();
 
