@@ -1,156 +1,29 @@
 {% extends "base.html" %}
 
 {% block page_content %}
+<!-- center: ol.proj.fromLonLat([18.585847, 54.403101]), -->
+<div id="mapid"></div>
 
-<div id="map"></div>
-<label for="adres">Adres:</label>
-<input type="text" id="adres">
-<button type="button" id ="p1">Przeslij</button>
-<button type="button" id ="p2">Wyczyść</button>
-<form class="form-inline">
-	<label>Geometry type &nbsp;</label>
-    <select id="type">
-    	<option value="None">Brak</option>
-        <option value="Polygon">Polygon</option>
-        <option value="Circle">Koło</option>  
-    </select>
-</form>
+<script>
+var map = L.map('map').setView([18.585847, 54.403101], 13);
 
-<script type="text/javascript">
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
 
-function main(){	  		  
-	var siedziba = 0;
-	var raster = new ol.layer.Tile({
-		source: new ol.source.OSM()
-		});
-	var source = new ol.source.Vector({wrapX: false});
-	var vector = new ol.layer.Vector({
-		source: source
-		});
+L.marker([18.585847, 54.403101]).addTo(map)
+    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+    .openPopup();
+    
+var popup = L.popup();
 
-	const map = new ol.Map({
-		target: 'map',
-		layers: [raster, vector],
-		view: new ol.View({
-			center: ol.proj.fromLonLat([18.585847, 54.403101]),
-			zoom: 13
-		  })
-		});
-		
-		// document.getElementById("p1").addEventListener("click", myFunction);
-		// document.getElementById("p2").addEventListener("click", p2);
-		
-		// ---------------------------\/
-
-	var typeSelect = document.getElementById('type');
-	var draw, snap; 
-		
-	function addInteraction() {
-		var value = typeSelect.value;	
-		if (value !== 'None'){		
-			draw = new ol.interaction.Draw({
-				source: source,
-				type: typeSelect.value,
-				freehandCondition: ol.events.condition.shiftKeyOnly
-				});							
-			map.addInteraction(draw);
-
-			snap = new ol.interaction.Snap({source: source});
-			map.addInteraction(snap);	
-		// ---------------------------/\
-
-			//narysowanie max 2 elementów
-			draw.on('drawstart', function () {
-				if(source.getFeatures().length >=2){
-					map.removeInteraction(draw);
-					document.getElementById('type').value='None';
-					}			
-				});
-
-			// ---------------------------\/
-			draw.on('drawend', function(event){
-				var geometry = event.feature.getGeometry();
-				console.log(geometry.getType());
-					
-				if(geometry.getType() == 'Circle'){
-					//Tutaj przekierować output radius i center do Pythona
-					var radius = circle.getRadius();
-					var center = circle.getCenter();
-					console.log(radius);	
-					console.log(center);
-				}else if(geometry.getType() == 'Polygon'){
-					//Tutaj trzeba przekierować output 'poly' do skryptu w Pythonie
-					var poly = geometry.getCoordinates();
-					console.log(poly);
-					}					
-				});			
-			}			
-		}
-			// ---------------------------/\
-		// ---------------------------\/
-			typeSelect.onchange = function() {
-				map.removeInteraction(draw);
-			  	map.removeInteraction(snap);
-			  	addInteraction();			
-		};
-		addInteraction();  
-		// ---------------------------/\
-		  
-		var modify = new ol.interaction.Modify({source: source});
-		map.addInteraction(modify);
-		
-
-
-
-
-
-
-		//czyszczenie narysowanych elementów
-		function p2(){
-			source.clear();
-			siedziba = 0;
-		}
-
-
-		//funkcja pobierająca adres:
-		function myFunction(){
-			
-			console.log(siedziba);
-			
-			if(siedziba < 1){
-						
-				var x = document.getElementById("adres").value;				
-				var query = 'https://nominatim.openstreetmap.org/search?q='+x+'&format=jsonv2&polygon=1&addressdetails=1'			
-					
-				//nie wiem jak pogodzić zakresy JQuery z JS ale działa
-				$.getJSON(query, function(data){	  
-					  
-					  if(data){
-						  var lnglat = ([ data[0].lon, data[0].lat]);
-						  //console.log(lnglat);				  
-									  
-						  var coord = ol.proj.fromLonLat(lnglat);
-						  //console.log(coord);
-						  
-						  var p = new ol.Feature(new ol.geom.Point(coord));				  
-						  source.addFeature(p);				  
-						  siedziba +=1;
-						  //wycentrowanie mapy na ustawionym adresie
-						  map.setView(new ol.View({center: coord,	zoom: 13 }))
-					  }
-				});
-				
-			}
-			
-		}	
-
-		  
+function onMapClick(e) {
+    popup
+        .setLatLng(e.latlng)
+        .setContent("You clicked the map at " + e.latlng.toString())
+        .openOn(mymap);
 }
 
-window.addEventListener ? 
-window.addEventListener("load", main, false) : 
-window.attachEvent && window.attachEvent("onload", main);
-
+mymap.on('click', onMapClick);
 </script>
-
 {% endblock %}
