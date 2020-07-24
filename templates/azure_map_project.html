@@ -71,10 +71,14 @@ if (type === 'circle') {
     latLngs = layer.getLatLng();
     console.log("Coordinates: " + latLngs.toString() + " Radius: " + theRadius.toString());
                         }
-else
+if (type === 'polygon') {
     latLngs = layer.getLatLngs();
     console.log("Coordinates: " + latLngs.toString());
-                        })
+                        }
+if (type === 'rectangle') {
+    latLngs = layer.getLatLngs();
+    console.log("Coordinates: " + latLngs.toString());
+                        }                })
 
 
 map.on('draw:edited', function (e) {
@@ -86,9 +90,10 @@ map.on('draw:edited', function (e) {
             latLngs = layer.getLatLng();
             console.log("Coordinates: " + latLngs.toString() + " Radius: " + theRadius.toString());
             }
-        else
+        if (layer instanceof L.Polyline){
             latLngs = layer.getLatLng();
             console.log("Coordinates: " + latLngs.toString());
+        }
         
     });
 });
