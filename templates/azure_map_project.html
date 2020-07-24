@@ -73,6 +73,7 @@ if (type === 'circle') {
                         }
 else
     latLngs = layer.getLatLngs();
+    console.log("Coordinates: " + latLngs.toString());
                         })
 
 
@@ -84,9 +85,13 @@ map.on('draw:edited', function (e) {
             var theRadius = layer.getRadius();
             latLngs = layer.getLatLng();
             console.log("Coordinates: " + latLngs.toString() + " Radius: " + theRadius.toString());
+        else
+            latLngs = layer.getLatLng();
+            console.log("Coordinates: " + latLngs.toString());
         }
     });
 });
+
 
 
 
