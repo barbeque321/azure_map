@@ -2,8 +2,8 @@
 
 {% block page_content %}
 <div id="map" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-    <div id= "button_1" class="leaflet-bottom leaflet-left">
-    <button id="generateButton" onClick='console.log("Event: "+ event.type)'> Generuj dane </button>
+    <div id= "button_1" class="leaflet-bottom leaflet-left" onclick='console.log("Event: "+ event.type);event.stopPropagation();'>
+    <button id="generateButton" > Generuj dane </button>
     </div>   
 
 
@@ -202,10 +202,6 @@ L.drawLocal = {
     }
 }
 
-
-var div = L.DomUtil.get('button_1'); // this must be an ID, not class!
-L.DomEvent.on(div, 'mousewheel', L.DomEvent.stopPropagation);
-L.DomEvent.on(div, 'click', L.DomEvent.stopPropagation);
 
 // function onMapClick(e) {
 // popup
