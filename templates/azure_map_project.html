@@ -91,11 +91,15 @@ map.on('draw:edited', function (e) {
             console.log("Coordinates: " + latLngs.toString() + " Radius: " + theRadius.toString());
             }
         if (layer instanceof L.Polyline){
-            latLngs = layer.getLatLng();
-            console.log("Coordinates: " + latLngs.toString());
+             coordinates = [];
+             latlngs = layer.getLatLngs();
+             for (var i = 0; i < latlngs.length; i++) {
+             coordinates.push([latlngs[i].lng, latlngs[i].lat])
+       
+            console.log("Coordinates: " + coordinates.toString());
         }
         
-    });
+    }});
 });
 
 
