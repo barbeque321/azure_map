@@ -1,10 +1,14 @@
 {% extends "base.html" %}
 
 {% block page_content %}
-<div id="map" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
-<button id="generateButton">
-        Generuj dane
-</button>
+<div id="map" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+    <div class="leaflet-bottom leaflet-left" style="pointer-events: auto">
+    <button id="generateButton" onClick="">Generuj dane</button>
+    </div>   
+
+
+</div>
+
 <script>
 
 var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
