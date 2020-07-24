@@ -121,7 +121,7 @@ L.drawLocal = {
                 tooltip: {
                     start: 'Kliknij by rozpocząć rysowanie',
                     cont: 'Kliknij ponownie by kontynuować rysowanie',
-                    end: 'Kliknij na pierwszy punkt by zakończyć'
+                    end: 'Jeśli chcesz zakończyć kliknij na pierwszy znacznik'
                 }
             },
             polyline: {
@@ -129,7 +129,7 @@ L.drawLocal = {
                 tooltip: {
                     start: 'Kliknij by rozpocząć rysowanie',
                     cont: 'Kliknij by kontynuować rysowanie.',
-                    end: 'Kliknij na ostatni punkt by zakończyć rysowanie.'
+                    end: 'Kliknij na ostatni punkt by zakończyć rysowanie'
                 }
             },
             rectangle: {
@@ -161,10 +161,13 @@ L.drawLocal = {
                 }
             },
             buttons: {
-                edit: 'Edytuj warstwy',
-                editDisabled: 'Brak warst do edycji',
-                remove: 'Usuń warstwy',
-                removeDisabled: 'Brak warstw do usunięcia'
+                edit: 'Edytuj obiekty',
+                editDisabled: 'Brak obiektów do edycji',
+                remove: 'Usuń obiekty',
+                removeDisabled: 'Brak obiektów do usunięcia',
+                polygon: 'Rysuj wielokąt',
+                circle: 'Rysuj okrąg',
+                rectangle: 'Rysuj czworokąt'
             }
         },
         handlers: {
