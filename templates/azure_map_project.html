@@ -66,6 +66,7 @@ L.marker([54.391091, 18.600883]).addTo(map).bindPopup('Some lazy Coder cave').op
 
 var popup = L.popup();
 
+L.drawLocal.draw.toolbar.buttons.polygon = 'Draw a sexy polygon!';
 
 
 L.drawLocal = {
@@ -79,6 +80,15 @@ L.drawLocal = {
     // },
     draw: {
         toolbar: {
+            buttons: {
+                edit: 'Edytuj obiekty',
+                editDisabled: 'Brak obiektów do edycji',
+                remove: 'Usuń obiekty',
+                removeDisabled: 'Brak obiektów do usunięcia',
+                polygon: 'Rysuj wielokąt',
+                circle: 'Rysuj okrąg',
+                rectangle: 'Rysuj czworokąt'
+            },
             actions: {
                 title: 'Anuluj rysowanie',
                 text: 'Anuluj'
@@ -93,11 +103,11 @@ L.drawLocal = {
             },
             buttons: {
                 polyline: 'Rysuj linie wielopunktową',
-                polygon: 'Narysuj wielokąt',
-                rectangle: 'Narysuj czworokąt',
-                circle: 'Narysuj okrąg',
-                marker: 'Nanieś znacznik klasyczny',
-                circlemarker: 'Nanieś znacznik kołowy'
+                polygon: 'Rysuj wielokąt',
+                rectangle: 'Rysuj czworokąt',
+                circle: 'Rysuj okrąg',
+                marker: 'Rysuj znacznik klasyczny',
+                circlemarker: 'Rysuj znacznik kołowy'
             }
         },
         handlers: {
