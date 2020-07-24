@@ -66,6 +66,126 @@ L.marker([54.391091, 18.600883]).addTo(map).bindPopup('Some lazy Coder cave').op
 
 var popup = L.popup();
 
+
+
+L.drawLocal = {
+    // format: {
+    //  numeric: {
+    //      delimiters: {
+    //          thousands: ',',
+    //          decimal: '.'
+    //      }
+    //  }
+    // },
+    draw: {
+        toolbar: {
+            actions: {
+                title: 'Anuluj rysowanie',
+                text: 'Anuluj'
+            },
+            finish: {
+                title: 'Zakończ rysowanie',
+                text: 'Zakończ'
+            },
+            undo: {
+                title: 'Usuń ostatni punkt',
+                text: 'Usuń ostatni punkt'
+            },
+            buttons: {
+                polyline: 'Rysuj linie wielopunktową',
+                polygon: 'Narysuj wielokąt',
+                rectangle: 'Narysuj czworokąt',
+                circle: 'Narysuj okrąg',
+                marker: 'Nanieś znacznik klasyczny',
+                circlemarker: 'Nanieś znacznik kołowy'
+            }
+        },
+        handlers: {
+            circle: {
+                tooltip: {
+                    start: 'Kliknij i przeciągnij by rysować okrąg'
+                },
+                radius: 'Promień'
+            },
+            circlemarker: {
+                tooltip: {
+                    start: 'Kliknij by umieścić znacznik kołowy'
+                }
+            },
+            marker: {
+                tooltip: {
+                    start: 'Kliknij by umieścić znacznik'
+                }
+            },
+            polygon: {
+                tooltip: {
+                    start: 'Kliknij by rozpocząć rysowanie',
+                    cont: 'Kliknij ponownie by kontynuować rysowanie',
+                    end: 'Kliknij na pierwszy punkt by zakończyć'
+                }
+            },
+            polyline: {
+                error: '<strong>Błąd:</strong> linie nie mogą się przecinać!',
+                tooltip: {
+                    start: 'Kliknij by rozpocząć rysowanie',
+                    cont: 'Kliknij by kontynuować rysowanie.',
+                    end: 'Kliknij na ostatni punkt by zakończyć rysowanie.'
+                }
+            },
+            rectangle: {
+                tooltip: {
+                    start: 'Kliknij i przeciągnij by rysować czworokąt'
+                }
+            },
+            simpleshape: {
+                tooltip: {
+                    end: 'Puść przycisk by przestać rysować'
+                }
+            }
+        }
+    },
+    edit: {
+        toolbar: {
+            actions: {
+                save: {
+                    title: 'Zapisz zmiany',
+                    text: 'Zapisz'
+                },
+                cancel: {
+                    title: 'Anuluj edycję, odrzuć wszystkie zmiany',
+                    text: 'Anuluj'
+                },
+                clearAll: {
+                    title: 'Usuń wszystko',
+                    text: 'Usuń wszystko'
+                }
+            },
+            buttons: {
+                edit: 'Edytuj warstwy',
+                editDisabled: 'Brak warst do edycji',
+                remove: 'Usuń warstwy',
+                removeDisabled: 'Brak warstw do usunięcia'
+            }
+        },
+        handlers: {
+            edit: {
+                tooltip: {
+                    text: 'Przeciągnij znaczniki by dokonać zmian',
+                    subtext: 'Kliknij anuluj by odrzucić zmiany'
+                }
+            },
+            remove: {
+                tooltip: {
+                    text: 'Kliknij na znacznik by usunąć'
+                }
+            }
+        }
+    }
+}
+
+
+
+
 // function onMapClick(e) {
 // popup
 //     .setLatLng(e.latlng)
