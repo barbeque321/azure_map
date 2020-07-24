@@ -2,7 +2,7 @@
 
 {% block page_content %}
 <div id="map" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-    <div id= "button_1" class="leaflet-bottom leaflet-left" onclick='Action_1();event.stopPropagation();'>
+    <div id= "button_1" class="leaflet-bottom leaflet-left" onclick='Action_2();event.stopPropagation();'>
     <button id="generateButton" > Generuj dane </button>
     </div>   
 
@@ -61,6 +61,21 @@ map.on(L.Draw.Event.DELETED, function(e) {
 });
 
 
+
+function Action_2(){
+    map.on(‘draw:created’, function (e) {
+    var type = e.layerType;
+    var layer = e.layer;
+    var latLngs;
+    var theRadius = layer.getRadius();
+
+    if (type === 'circle') {
+        latLngs = layer.getLatLng();
+        console.log("Coordinates: " + latLngs.toString()+ theRadius.toString());
+                            }
+    else
+        latLngs = layer.getLatLngs();
+                            }
 
 
 
