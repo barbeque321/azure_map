@@ -65,11 +65,11 @@ map.on('draw:created', function (e) {
 var type = e.layerType;
 var layer = e.layer;
 var latLngs;
-var theRadius = layer.getRadius();
 
 if (type === 'circle') {
+    var theRadius = layer.getRadius();
     latLngs = layer.getLatLng();
-    console.log("Coordinates: " + latLngs.toString() + "Radius: " + theRadius.toString());
+    console.log("Coordinates: " + latLngs.toString() + " Radius: " + theRadius.toString());
                         }
 else
     latLngs = layer.getLatLngs();
