@@ -116,15 +116,13 @@ var searchControl = L.esri.Geocoding.geosearch({
     }).addTo(map);
 
 var results = L.layerGroup().addTo(map);
-var buissnes_adress;
 
 searchControl.on('results', function (data) {
     results.clearLayers();
-    var layer = data.layer;
     for (var i = data.results.length - 1; i >= 0; i--) {
     results.addLayer(L.marker(data.results[i].latlng));
-    business_adress = layer.getLatLngs();
-    console.log("Coordinates: " + business_adress.toString());
+    results = layer.getLatLngs();
+    console.log("Coordinates: " + results.toString());
     }
   });
 
