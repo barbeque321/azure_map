@@ -109,7 +109,11 @@ function Action_1(){
 
 
 
-var searchControl = L.esri.Geocoding.geosearch().addTo(map);
+var searchControl = L.esri.Geocoding.geosearch({
+    zoomToResult: false,
+    placeholder: "Wyszukaj lokalizację siedziby",
+    title: "Wyszukaj siedzibę"
+    }).addTo(map);
 
 var results = L.layerGroup().addTo(map);
 
