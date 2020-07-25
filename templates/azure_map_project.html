@@ -116,7 +116,8 @@ function Action_1(){
 
 var searchControl = L.esri.Geocoding.geosearch({
     placeholder: "Wyszukaj lokalizację siedziby",
-    title: "Wyszukaj siedzibę"
+    title: "Wyszukaj siedzibę",
+    zoomToResult: false
     }).addTo(map);
 
 var results = L.layerGroup().addTo(map);
@@ -133,6 +134,7 @@ searchControl.on('results', function (data) {
         var theAdress;
         theAdress = layer.getLatLng();
         console.log("Coordinates: " + theAdress.toString());
+        map.setView(new View({center: theAdress, zoom: 11 }));
         }
     }
     )
