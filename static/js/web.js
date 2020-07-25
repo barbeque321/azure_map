@@ -93,7 +93,7 @@ map.on('draw:edited', function (e) {
 function Action_1(){
     L.marker([54.391091, 18.600883]).addTo(map).bindPopup('Some lazy Coder cave').openPopup();
     var popup = L.popup();
-    console.log({% url 'azure_map:current_datetime' %});
+    console.log("{% url 'azure_map:current_datetime' %}");
       }
 
 
