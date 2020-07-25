@@ -134,8 +134,7 @@ searchControl.on('results', function (data) {
         var theAdress;
         theAdress = layer.getLatLng();
         console.log("Coordinates: " + theAdress.toString());
-        var bounds = theAdress.toBounds(5000); 
-        map.panTo(theAdress).fitBounds(bounds);
+        map.setView(theAdress, 11, { animation: true });  
         }
     }
     )
