@@ -120,8 +120,9 @@ searchControl.on('results', function (data) {
     results.clearLayers();
     for (var i = data.results.length - 1; i >= 0; i--) {
     results.addLayer(L.marker(data.results[i].latlng));
+    map.setZoom(zoom: 11)
     }
-    map.setZoom(zoom:11);
+    
 
     results.eachLayer(function (layer) {
     if (layer instanceof L.Marker){
