@@ -23,7 +23,7 @@ L.control.layers({
     })
 }, { 'Zaznaczenia': drawnItems }, { position: 'topleft', collapsed: false }).addTo(map);
 
-var zoomControl = new L.control.zoom({
+var zoomControl = new L.control.zoom(true, {
     zoomInTitle: 'Przybliż',
     zoomOutTitle: 'Oddal'
 });
