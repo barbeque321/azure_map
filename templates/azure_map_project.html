@@ -14,7 +14,7 @@
 var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a>',
         osm = L.tileLayer(osmUrl, { maxZoom: 17, attribution: osmAttrib }),
-        map = new L.Map('map', { center: new L.LatLng(54.391091, 18.600883), zoom: 11 }),
+        map = new L.Map('map', { center: new L.LatLng(52.308479, 19.313965), zoom: 6 }),
         drawnItems = L.featureGroup().addTo(map);
 L.control.layers({
     'Mapa': osm.addTo(map),
@@ -23,10 +23,6 @@ L.control.layers({
     })
 }, { 'Zaznaczenia': drawnItems }, { position: 'topleft', collapsed: false }).addTo(map);
 
-var zoomControl = new L.control.zoom(true, {
-    zoomInTitle: 'Przybliż',
-    zoomOutTitle: 'Oddal'
-});
 
 var drawControlFull = new L.Control.Draw({
     draw: {
@@ -176,14 +172,6 @@ L.drawLocal = {
                 title: 'Usuń ostatni punkt',
                 text: 'Usuń ostatni punkt'
             },
-            buttons: {
-                polyline: 'Rysuj linie wielopunktową',
-                polygon: 'Rysuj wielokąt',
-                rectangle: 'Rysuj czworokąt',
-                circle: 'Rysuj okrąg',
-                marker: 'Rysuj znacznik klasyczny',
-                circlemarker: 'Rysuj znacznik kołowy'
-            }
         },
         handlers: {
             circle: {
