@@ -23,6 +23,11 @@ L.control.layers({
     })
 }, { 'Zaznaczenia': drawnItems }, { position: 'topleft', collapsed: false }).addTo(map);
 
+L.control.zoom({
+    zoomInTitle: 'Przybliż',
+    zoomOutTitle: 'Oddal'
+});
+
 var drawControlFull = new L.Control.Draw({
     draw: {
         polyline: false,
