@@ -110,7 +110,6 @@ function Action_1(){
 
 
 var searchControl = L.esri.Geocoding.geosearch({
-    zoomToResult: false,
     placeholder: "Wyszukaj lokalizację siedziby",
     title: "Wyszukaj siedzibę"
     }).addTo(map);
@@ -130,7 +129,6 @@ searchControl.on('results', function (data) {
         theAdress = layer.getLatLng();
         console.log("Coordinates: " + theAdress.toString());
         }
-        map.fitBounds(data.results[11].bounds);
     }
     )
   });
