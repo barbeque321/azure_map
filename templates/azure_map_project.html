@@ -14,7 +14,7 @@
 var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a>',
         osm = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib }),
-        map = new L.Map('map', { center: new L.LatLng(54.391091, 18.600883), zoom: 11 }),
+        map = new L.Map('map', { center: new L.LatLng(54.391091, 18.600883), zoom: 11, maxZoom: 17 }),
         drawnItems = L.featureGroup().addTo(map);
 L.control.layers({
     'Mapa': osm.addTo(map),
