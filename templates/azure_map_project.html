@@ -130,7 +130,7 @@ searchControl.on('results', function (data) {
         theAdress = layer.getLatLng();
         console.log("Coordinates: " + theAdress.toString());
         }
-
+        map.fitBounds(data.results[11].bounds);
     }
     )
   });
