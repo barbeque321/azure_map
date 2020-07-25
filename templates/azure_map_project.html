@@ -123,7 +123,7 @@ searchControl.on('results', function (data) {
     var layer = data.layer;
     for (var i = data.results.length - 1; i >= 0; i--) {
     results.addLayer(L.marker(data.results[i].latlng));
-    business_adress = layer.getLatLng();
+    business_adress = layer.getLatLngs();
     console.log("Coordinates: " + business_adress.toString());
     }
   });
