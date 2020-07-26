@@ -1,7 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-import datetime
-from django.template import loader
 
 # Create your views here.
 def azure_map_project(request):
