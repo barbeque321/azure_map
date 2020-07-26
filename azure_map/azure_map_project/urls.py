@@ -7,7 +7,7 @@ from django.conf.urls import url
 
 urlpatterns = [
     url('', views.azure_map_project, name='azure_map_project'),
-    url('', views.generate, name='generate'),
+    url('generate/', views.generate, name='generate'),
     # path('', views.current_datetime, name='current_datetime'),
 ]
 
