@@ -5,10 +5,12 @@ from django.conf import settings
 from django.conf.urls import url
 
 
-app_name = 'azure_map_project'
+
 
 urlpatterns = [
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
     url('', include('azure_map_project.urls', namespace="azure_map_project") ),
     
 ]
+
+app_name = 'azure_map_project'
