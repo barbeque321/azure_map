@@ -64,15 +64,15 @@ if (type === 'circle') {
     latLngs = layer.getLatLng();
     console.log("Coordinates: " + latLngs.toString() + " Radius: " + theRadius.toString());
     return {latLngs, theRadius}
-    $.ajax({
-            type: "GET",
-            url: 'process_loc',
-            data:{
-                'latLngs': latLngs,
-            },
-            dataType : "json",
-            }
-)
+    // $.ajax({
+    //         type: "GET",
+    //         url: 'process_loc',
+    //         data:{
+    //             'latLngs': latLngs,
+    //         },
+    //         dataType : "json",
+    //         }
+// )
                         }
 if (type === 'polygon') {
     latLngs = layer.getLatLngs();
