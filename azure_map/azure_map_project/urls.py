@@ -6,7 +6,7 @@ from django.conf.urls import url
 
 
 urlpatterns = [
-    path('', views.show_map, name='my_map'),
+    path('', views.azure_map_project, name='my_map'),
     # url('', views.generate, name='generate'),
 ]
 

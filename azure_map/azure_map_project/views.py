@@ -4,7 +4,7 @@ import datetime
 from django.template import loader
 
 # Create your views here.
-def show_map(request):
+def azure_map_project(request):
     return render(request, 'azure_map_project.html', {})
 
 # def generate(request):
