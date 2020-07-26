@@ -9,6 +9,6 @@ app_name = 'azure_map'
 
 urlpatterns = [
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
-    path('', include('azure_map_project.urls', namespace="azure_map") ),
+    url('', include('azure_map_project.urls', namespace="azure_map") ),
     
 ]
