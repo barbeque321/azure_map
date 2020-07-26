@@ -1,3 +1,8 @@
+var latLngs;
+var theRadius;
+
+
+
 
 var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -53,7 +58,6 @@ map.on(L.Draw.Event.DELETED, function(e) {
 map.on('draw:created', function (e) {
 var type = e.layerType;
 var layer = e.layer;
-var latLngs;
 
 if (type === 'circle') {
     var theRadius = layer.getRadius();
@@ -73,7 +77,6 @@ if (type === 'rectangle') {
 
 map.on('draw:edited', function (e) {
     var layers = e.layers;
-    var latLngs;
     layers.eachLayer(function (layer) {
         if (layer instanceof L.Circle){
             var theRadius = layer.getRadius();
