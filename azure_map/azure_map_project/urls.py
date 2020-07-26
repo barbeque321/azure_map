@@ -1,13 +1,13 @@
 from django.urls import path
-from azure_map_project import views
+from azure_map_project.views import show_map
 from django.urls import include, path, re_path
 from django.conf.urls import url
 
 
 
-urlpatterns += [
-    url('', azure_map_project.views.azure_map_project, name='azure_map_project'),
-    url('', azure_map_project.views.generate, name='generate'),
+urlpatterns = [
+    path('', views.show_map, name='my_map'),
+    # url('', views.generate, name='generate'),
 ]
 
 app_name = 'azure_map_project'
