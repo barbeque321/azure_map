@@ -8,5 +8,5 @@ from django.conf.urls import url
 
 urlpatterns = [
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
-    path('', include('azure_map_project.urls')),
+    path('', include('azure_map_project.urls'), name='azure_map_project'),
 ]
