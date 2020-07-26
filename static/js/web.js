@@ -252,32 +252,22 @@ L.drawLocal = {
 }
 
 
-// function onMapClick(e) {
-// popup
-//     .setLatLng(e.latlng)
-//     .setContent("Hm what's here... " + e.latlng.toString())
-//     .openOn(map);
-// }
-// map.on('click', onMapClick);
 
 
-// L.Control.Watermark = L.Control.extend({
-//     onAdd: function(map) {
-//         var img = L.DomUtil.create('img');
+$.ajax({
+            type: "GET",
+            url: 'process_loc',
+            data:{
+                'latLngs': latLngs,
+            },
+            dataType : "json",
+            }
+)
 
-//         img.src = '../../docs/images/logo.png';
-//         img.style.width = '200px';
 
-//         return img;
-//     },
 
-//     onRemove: function(map) {
-//         // Nothing to do here
-//     }
-// });
 
-// L.control.watermark = function(opts) {
-//     return new L.Control.Watermark(opts);
-// }
 
-// L.control.watermark({ position: 'bottomleft' }).addTo(map);
+
+
+
