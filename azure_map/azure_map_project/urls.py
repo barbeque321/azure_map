@@ -4,6 +4,7 @@ from django.urls import include, path, re_path
 
 
 app_name = 'azure_map'
+
 urlpatterns = [
     path('', views.azure_map_project, name='azure_map_project'),
     path('', views.generate, name='generate'),
