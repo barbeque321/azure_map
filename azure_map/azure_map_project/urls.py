@@ -10,4 +10,4 @@ urlpatterns = [
     # url('', views.generate, name='generate'),
 ]
 
-app_name = 'azure_map_project'
+# app_name = 'azure_map_project'
