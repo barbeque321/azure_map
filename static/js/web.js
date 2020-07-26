@@ -59,6 +59,7 @@ if (type === 'circle') {
     var theRadius = layer.getRadius();
     latLngs = layer.getLatLng();
     console.log("Coordinates: " + latLngs.toString() + " Radius: " + theRadius.toString());
+    return {latLngs, theRadius}
                         }
 if (type === 'polygon') {
     latLngs = layer.getLatLngs();
