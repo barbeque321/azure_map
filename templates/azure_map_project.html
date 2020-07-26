@@ -5,11 +5,11 @@
 {% block page_content %}
 
 <div id="map" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-    <div id= "button_1" class="leaflet-bottom leaflet-left" onclick='Action_1();event.stopPropagation();'>
+    <div id= "button_1" class="leaflet-bottom leaflet-left" onclick="location.href={% url 'generate'%}">
         <button id="generateButton" > Generuj dane </button>
     </div>   
 </div>
-
+<!-- onclick='Action_1();event.stopPropagation();' -->
 
 {% endblock %}
 
