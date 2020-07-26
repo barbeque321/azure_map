@@ -1,5 +1,5 @@
 from django.urls import path
-from azure_map_project.views import show_map
+from azure_map_project import views
 from django.urls import include, path, re_path
 from django.conf.urls import url
 

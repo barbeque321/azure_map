@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class AzureMapProjectConfig(AppConfig):
-    name = 'azure_map'
+    name = 'azure_map_project'
