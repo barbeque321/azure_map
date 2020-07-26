@@ -3,7 +3,7 @@ from azure_map_project import views
 from django.urls import include, path, re_path
 from django.conf.urls import url
 
-app_name = 'azure_map'
+app_name = 'azure_map_project'
 
 urlpatterns = [
     url('', views.azure_map_project, name='azure_map_project'),
