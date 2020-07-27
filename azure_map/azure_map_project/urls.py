@@ -1,4 +1,4 @@
-from . import views
+from azure_map_project import views
 from django.urls import include, path, re_path
 from django.conf.urls import url
 
